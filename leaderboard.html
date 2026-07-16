@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Global Leaderboard | QuranAcademy</title>
+
+    <link rel="stylesheet" href="academy.css">
+</head>
+
+<body>
+
+<header class="academy-header">
+
+    <a class="academy-logo" href="index.html">
+        QuranAcademy
+    </a>
+
+    <nav class="academy-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Levels</a>
+        <a href="reader.html">Full Quran</a>
+        <a class="active" href="leaderboard.html">Leaderboard</a>
+        <a href="rewards.html">Rewards</a>
+        <a class="account-link" href="account.html">Account</a>
+    </nav>
+
+</header>
+
+<main class="page-shell">
+
+    <p class="eyebrow">
+        Registered learners
+    </p>
+
+    <h1 class="page-title">
+        Global Leaderboard
+    </h1>
+
+    <p class="page-description">
+        Earn XP by completing learning levels.
+        Only learner nicknames, XP, ranks, and completed
+        level totals are shown.
+    </p>
+
+    <section
+        class="podium-grid"
+        id="podiumGrid"
+    ></section>
+
+    <section
+        class="surface-card leaderboard-card"
+        id="leaderboardCard"
+    >
+
+        <div class="leaderboard-row header">
+            <span>Place</span>
+            <span>Learner</span>
+            <span>Rank</span>
+            <span>XP</span>
+        </div>
+
+        <div
+            class="empty-state"
+            id="leaderboardLoading"
+        >
+            Loading global rankings...
+        </div>
+
+    </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+    const podiumGrid =
+        document.getElementById("podiumGrid");
+
+    const leaderboardCard =
+        document.getElementById("leaderboardCard");
+
+    const leaderboardLoading =
+        document.getElementById(
+            "leaderboardLoading"
+        );
+
+    const toast =
+        document.getElementById("toast");
+
+    let currentUserId = null;
+
+    function getRank(xp) {
+        if (xp >= 1000) {
+            return {
+                name: "Diamond",
+                emoji: "💎"
+            };
+        }
+
+        if (xp >= 700) {
+            return {
+                name: "Platinum",
+                emoji: "🏅"
+            };
+        }
+
+        if (xp >= 400) {
+            return {
+                name: "Gold",
+                emoji: "🥇"
+            };
+        }
+
+        if (xp >= 150) {
+            return {
+                name: "Silver",
+                emoji: "🥈"
+            };
+        }
+
+        return {
+            name: "Bronze",
+            emoji: "🥉"
+        };
+    }
+
+    function getInitials(name) {
+        return name
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map((word) => word[0].toUpperCase())
+            .join("") || "QA";
+    }
+
+    function showToast(message) {
+        toast.textContent = message;
+        toast.classList.remove("show");
+
+        void toast.offsetWidth;
+
+        toast.classList.add("show");
+    }
+
+    function renderPodium(players) {
+        podiumGrid.innerHTML = "";
+
+        const order = [
+            {
+                index: 1,
+                place: "🥈",
+                className: "second"
+            },
+            {
+                index: 0,
+                place: "🥇",
+                className: "first"
+            },
+            {
+                index: 2,
+                place: "🥉",
+                className: "third"
+            }
+        ];
+
+        order.forEach((podium) => {
+            const player =
+                players[podium.index];
+
+            if (!player) {
+                return;
+            }
+
+            const card =
+                document.createElement("article");
+
+            card.className =
+                `podium-card ${podium.className}`;
+
+            const place =
+                document.createElement("div");
+
+            place.className = "podium-place";
+            place.textContent = podium.place;
+
+            const avatar =
+                document.createElement("div");
+
+            avatar.className = "podium-avatar";
+
+            avatar.textContent =
+                getInitials(player.username);
+
+            const name =
+                document.createElement("h3");
+
+            name.textContent = player.username;
+
+            const xp =
+                document.createElement("p");
+
+            xp.textContent =
+                `${player.xp} XP`;
+
+            const rank =
+                document.createElement("span");
+
+            const rankData =
+                getRank(player.xp);
+
+            rank.className = "rank-badge";
+
+            rank.textContent =
+                `${rankData.emoji} ${rankData.name}`;
+
+            card.append(
+                place,
+                avatar,
+                name,
+                xp,
+                rank
+            );
+
+            podiumGrid.appendChild(card);
+        });
+    }
+
+    function renderLeaderboard(players) {
+        leaderboardLoading.remove();
+
+        players.forEach((player, index) => {
+            const row =
+                document.createElement("div");
+
+            row.className = "leaderboard-row";
+
+            if (player.id === currentUserId) {
+                row.classList.add("current-user");
+            }
+
+            const place =
+                document.createElement("strong");
+
+            place.textContent =
+                `#${index + 1}`;
+
+            const nameWrapper =
+                document.createElement("div");
+
+            nameWrapper.className = "leader-name";
+
+            const avatar =
+                document.createElement("div");
+
+            avatar.className =
+                "leader-name-avatar";
+
+            avatar.textContent =
+                getInitials(player.username);
+
+            const name =
+                document.createElement("span");
+
+            name.textContent =
+                player.id === currentUserId
+                    ? `${player.username} (You)`
+                    : player.username;
+
+            nameWrapper.append(avatar, name);
+
+            const rank =
+                document.createElement("span");
+
+            const rankData =
+                getRank(player.xp);
+
+            rank.className = "rank-badge";
+
+            rank.textContent =
+                `${rankData.emoji} ${rankData.name}`;
+
+            const xp =
+                document.createElement("strong");
+
+            xp.textContent =
+                String(player.xp);
+
+            row.append(
+                place,
+                nameWrapper,
+                rank,
+                xp
+            );
+
+            leaderboardCard.appendChild(row);
+        });
+    }
+
+    async function loadLeaderboard() {
+        try {
+            const {
+                data: userData
+            } =
+                await window
+                    .quranAcademySupabase
+                    .auth
+                    .getUser();
+
+            currentUserId =
+                userData?.user?.id || null;
+
+            const {
+                data: players,
+                error
+            } =
+                await window
+                    .quranAcademySupabase
+                    .from("profiles")
+                    .select(
+                        "id, username, xp, completed_levels, created_at"
+                    )
+                    .order(
+                        "xp",
+                        {
+                            ascending: false
+                        }
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    )
+                    .limit(100);
+
+            if (error) {
+                throw error;
+            }
+
+            if (!players.length) {
+                leaderboardLoading.textContent =
+                    "No registered learners have earned XP yet.";
+
+                return;
+            }
+
+            renderPodium(players.slice(0, 3));
+            renderLeaderboard(players);
+        } catch (error) {
+            console.error(error);
+
+            leaderboardLoading.textContent =
+                "The leaderboard could not load.";
+
+            showToast(
+                "Please refresh and try again."
+            );
+        }
+    }
+
+    loadLeaderboard();
+</script>
+
+</body>
+</html>
