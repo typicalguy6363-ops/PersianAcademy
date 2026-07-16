@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Quran Reader | QuranAcademy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <nav class="navbar">
+        <a class="logo" href="index.html">QuranAcademy</a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="navigation" id="navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="reader.html">Reader</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+
+            <div class="account-buttons">
+                <a class="button button-outline" href="signin.html">Sign In</a>
+                <a class="button button-primary" href="signup.html">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="reader-page">
+    <div class="reader-layout reveal">
+
+        <aside class="reader-sidebar">
+            <div class="sidebar-card">
+                <p class="eyebrow">Quran controls</p>
+
+                <div class="control-group">
+                    <label for="surahSelect">Surah</label>
+                    <select id="surahSelect"></select>
+                </div>
+
+                <div class="control-group">
+                    <label for="reciterSelect">Reciter</label>
+                    <select id="reciterSelect">
+                        <option value="ar.alafasy">Mishary Alafasy</option>
+                        <option value="ar.husary">Mahmoud Khalil Al-Husary</option>
+                        <option value="ar.minshawi">Muhammad Siddiq al-Minshawi</option>
+                        <option value="ar.sudais">Abdur Rahman as-Sudais</option>
+                        <option value="ar.abdulbasitmurattal">Abdul Basit Murattal</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="speedSelect">Speed</label>
+                    <select id="speedSelect">
+                        <option value="0.5">0.5×</option>
+                        <option value="0.75">0.75×</option>
+                        <option value="1" selected>1×</option>
+                        <option value="1.25">1.25×</option>
+                        <option value="1.5">1.5×</option>
+                        <option value="2">2×</option>
+                    </select>
+                </div>
+
+                <div class="control-buttons">
+                    <button class="button button-primary" id="loadSurahButton" type="button">
+                        Load Surah
+                    </button>
+
+                    <button class="button button-secondary" id="nextSurahButton" type="button">
+                        Next Surah
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-card info-card">
+                <h3>Good news</h3>
+                <p>
+                    You can use the whole Quran reader without creating an
+                    account.
+                </p>
+            </div>
+
+            <div class="sidebar-card info-card">
+                <h3>Audio source</h3>
+                <p>
+                    Streaming recitation is powered by Al Quran Cloud.
+                </p>
+            </div>
+        </aside>
+
+        <section class="reader-main">
+            <div class="reader-header-card">
+                <p class="eyebrow">Now reading</p>
+                <h1 id="surahTitle">Loading...</h1>
+                <p class="reader-subtitle" id="surahSubtitle">
+                    Please wait while the surah loads.
+                </p>
+
+                <audio
+                    id="surahAudio"
+                    controls
+                    preload="none"
+                    class="reader-audio"
+                ></audio>
+
+                <p class="audio-source-text" id="audioSourceText">
+                    Choose a surah and a reciter, then press Load Surah.
+                </p>
+            </div>
+
+            <div class="ayahs-card">
+                <div class="ayahs-top">
+                    <h2>Arabic Text</h2>
+                    <button
+                        class="button button-outline"
+                        type="button"
+                        data-modal-title="Highlights"
+                        data-modal-message="Word highlighting can be added later. For now, the full Quran reader and audio are working first."
+                        data-modal-icon="✨"
+                    >
+                        About Highlights
+                    </button>
+                </div>
+
+                <div id="ayahContainer" class="ayah-container">
+                    <p class="loading-text">Loading Quran text...</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="script.js"></script>
+<script src="reader.js"></script>
+</body>
+</html>
