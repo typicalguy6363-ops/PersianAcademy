@@ -1,322 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <meta
-        name="description"
-        content="QuranAcademy helps children and beginners learn Quran through a simple, beautiful, and kid-friendly experience."
-    >
-    <title>QuranAcademy | Learn Quran Beautifully</title>
+const SURAH_LIST_URL = "https://api.alquran.cloud/v1/surah";
+const SURAH_TEXT_URL = "https://api.alquran.cloud/v1/surah/";
+const AUDIO_BASE_URL = "https://cdn.islamic.network/quran/audio-surah/128/";
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-    <link
-        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+document.addEventListener("DOMContentLoaded", () => {
+    setupReader();
+});
 
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+async function setupReader() {
+    const surahSelect = document.getElementById("surahSelect");
+    const reciterSelect = document.getElementById("reciterSelect");
+    const speedSelect = document.getElementById("speedSelect");
+    const loadButton = document.getElementById("loadSurahButton");
+    const nextButton = document.getElementById("nextSurahButton");
+    const surahAudio = document.getElementById("surahAudio");
 
-<header class="site-header">
-    <nav class="navbar">
-        <a class="logo" href="index.html">QuranAcademy</a>
+    if (
+        !surahSelect ||
+        !reciterSelect ||
+        !speedSelect ||
+        !loadButton ||
+        !nextButton ||
+        !surahAudio
+    ) {
+        return;
+    }
 
-        <button
-            class="menu-button"
-            id="menuButton"
-            type="button"
-            aria-label="Open menu"
-            aria-expanded="false"
-        >
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+    let surahs = [];
 
-        <div class="navigation" id="navigation">
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#how">How It Works</a></li>
-                <li><a href="#reader-preview">Reader</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
+    try {
+        const response = await fetch(SURAH_LIST_URL);
+        const result = await response.json();
+        surahs = result.data || [];
 
-            <div class="account-buttons">
-                <a class="button button-outline" href="signin.html">Sign In</a>
-                <a class="button button-primary" href="signup.html">Sign Up</a>
-            </div>
-        </div>
-    </nav>
-</header>
+        populateSurahSelect(surahs);
 
-<main>
+        const params = new URLSearchParams(window.location.search);
+        const requestedSurah = Number(params.get("surah")) || 1;
+        const requestedReciter = params.get("reciter");
 
-    <section class="hero section" id="home">
-        <div class="float-shape shape-one"></div>
-        <div class="float-shape shape-two"></div>
-        <div class="float-shape shape-three"></div>
+        surahSelect.value = String(requestedSurah);
 
-        <div class="hero-content reveal">
+        if (requestedReciter) {
+            reciterSelect.value = requestedReciter;
+        }
 
-            <div class="hero-text">
-                <p class="eyebrow">Kid-friendly Quran learning</p>
+        await loadSurahData();
+    } catch (error) {
+        showReaderError(
+            "Could not load the surah list. Please check your internet connection and try again."
+        );
+        return;
+    }
 
-                <h1>
-                    Learn Quran with
-                    <span class="rainbow-text">joy, beauty, and care.</span>
-                </h1>
+    loadButton.addEventListener("click", async () => {
+        await loadSurahData();
+    });
 
-                <p class="hero-description">
-                    QuranAcademy helps children and beginners listen,
-                    read, and practice the Quran in a simple and welcoming
-                    way. The full Quran reader is available even without
-                    signing up.
-                </p>
+    nextButton.addEventListener("click", async () => {
+        const current = Number(surahSelect.value);
 
-                <div class="hero-buttons">
-                    <a
-                        class="button button-primary button-large"
-                        href="reader.html"
-                    >
-                        Open Quran Reader
-                    </a>
+        if (current < surahs.length) {
+            surahSelect.value = String(current + 1);
+            await loadSurahData();
+        } else if (window.showSiteModal) {
+            window.showSiteModal(
+                "📖",
+                "Last Surah",
+                "You are already at the last surah."
+            );
+        }
+    });
 
-                    <a
-                        class="button button-secondary button-large"
-                        href="#how"
-                    >
-                        See How It Works
-                    </a>
-                </div>
+    speedSelect.addEventListener("change", () => {
+        surahAudio.playbackRate = Number(speedSelect.value);
+    });
 
-                <div class="hero-stats">
-                    <div class="stat">
-                        <strong>114</strong>
-                        <span>Surahs available</span>
-                    </div>
+    async function loadSurahData() {
+        const surahNumber = Number(surahSelect.value);
+        const reciter = reciterSelect.value;
+        const speed = Number(speedSelect.value);
 
-                    <div class="stat">
-                        <strong>Free</strong>
-                        <span>No sign-up required to read</span>
-                    </div>
+        updateReaderHeader("Loading...", "Please wait while the surah loads.");
+        setAyahLoading();
+        updateAudioSourceText("Loading surah audio and text...");
 
-                    <div class="stat">
-                        <strong>0.5×–2×</strong>
-                        <span>Speed control</span>
-                    </div>
-                </div>
-            </div>
+        updateUrl(surahNumber, reciter);
 
-            <div class="hero-visual">
-                <div class="kid-scene">
+        try {
+            const response = await fetch(
+                `${SURAH_TEXT_URL}${surahNumber}/quran-uthmani`
+            );
 
-                    <span class="sparkle sparkle-1">✨</span>
-                    <span class="sparkle sparkle-2">⭐</span>
-                    <span class="sparkle sparkle-3">🌙</span>
+            const result = await response.json();
 
-                    <div class="quran-book">
-                        <div class="book-line"></div>
-                        <div class="book-line"></div>
-                        <div class="book-line"></div>
-                        <span>Quran</span>
-                    </div>
+            if (!result.data) {
+                throw new Error("No surah data returned");
+            }
 
-                    <div class="kid kid-boy">
-                        <div class="kid-head">
-                            <div class="kid-hair"></div>
-                            <div class="kid-face">
-                                <span class="eye left-eye"></span>
-                                <span class="eye right-eye"></span>
-                                <span class="smile"></span>
-                            </div>
-                        </div>
-                        <div class="kid-body"></div>
-                    </div>
+            const surah = result.data;
 
-                    <div class="kid kid-girl">
-                        <div class="kid-head">
-                            <div class="kid-hijab"></div>
-                            <div class="kid-face">
-                                <span class="eye left-eye"></span>
-                                <span class="eye right-eye"></span>
-                                <span class="smile"></span>
-                            </div>
-                        </div>
-                        <div class="kid-body"></div>
-                    </div>
+            updateReaderHeader(
+                `${surah.number}. ${surah.englishName}`,
+                `${surah.name} • ${surah.englishNameTranslation}`
+            );
 
-                </div>
-            </div>
+            renderAyahs(surah.ayahs);
 
-        </div>
-    </section>
+            surahAudio.src = `${AUDIO_BASE_URL}${reciter}/${surahNumber}.mp3`;
+            surahAudio.playbackRate = speed;
+            surahAudio.load();
 
-    <section class="section how-section" id="how">
-        <div class="section-heading reveal">
-            <p class="eyebrow">How it works</p>
-            <h2>Simple steps for learning</h2>
-            <p>
-                We kept QuranAcademy simple so kids can focus on learning.
-            </p>
-        </div>
+            updateAudioSourceText(
+                `Streaming ${surah.englishName} from Al Quran Cloud using the selected reciter.`
+            );
+        } catch (error) {
+            updateReaderHeader("Something went wrong", "We could not load the surah.");
+            showReaderError(
+                "Could not load this surah right now. Try another surah or another reciter."
+            );
+            updateAudioSourceText(
+                "The audio or text could not be loaded right now."
+            );
+        }
+    }
+}
 
-        <div class="feature-grid">
-            <article class="feature-card reveal">
-                <div class="feature-icon">📖</div>
-                <h3>Read the Quran</h3>
-                <p>
-                    Open the full Quran reader and choose any surah.
-                </p>
-            </article>
+function populateSurahSelect(surahs) {
+    const surahSelect = document.getElementById("surahSelect");
+    surahSelect.innerHTML = "";
 
-            <article class="feature-card reveal">
-                <div class="feature-icon">🎧</div>
-                <h3>Listen Online</h3>
-                <p>
-                    Stream recitation without downloading giant audio files.
-                </p>
-            </article>
+    surahs.forEach((surah) => {
+        const option = document.createElement("option");
+        option.value = String(surah.number);
+        option.textContent = `${surah.number}. ${surah.englishName} (${surah.name})`;
+        surahSelect.appendChild(option);
+    });
+}
 
-            <article class="feature-card reveal">
-                <div class="feature-icon">⚡</div>
-                <h3>Change Speed</h3>
-                <p>
-                    Slow the recitation down or speed it up to match the
-                    learner’s level.
-                </p>
-            </article>
+function updateReaderHeader(title, subtitle) {
+    document.getElementById("surahTitle").textContent = title;
+    document.getElementById("surahSubtitle").textContent = subtitle;
+}
 
-            <article class="feature-card reveal">
-                <div class="feature-icon">🎙️</div>
-                <h3>Practice Later</h3>
-                <p>
-                    AI pronunciation tools can be added later after mentor
-                    review and guidance.
-                </p>
-            </article>
-        </div>
-    </section>
+function updateAudioSourceText(text) {
+    document.getElementById("audioSourceText").textContent = text;
+}
 
-    <section class="section reader-preview-section" id="reader-preview">
-        <div class="reader-preview-card reveal">
-            <div class="reader-preview-text">
-                <p class="eyebrow">Quran reader</p>
-                <h2>The whole Quran, ready to open</h2>
-                <p>
-                    No huge downloads. No messy setup. Just open the reader,
-                    choose a surah, pick a reciter, and listen.
-                </p>
+function setAyahLoading() {
+    const container = document.getElementById("ayahContainer");
+    container.innerHTML = `<p class="loading-text">Loading Quran text...</p>`;
+}
 
-                <ul class="preview-list">
-                    <li>✓ Full Quran reading interface</li>
-                    <li>✓ Online recitation streaming</li>
-                    <li>✓ Reciter selector</li>
-                    <li>✓ Playback speed control</li>
-                    <li>✓ Optional sign in</li>
-                </ul>
+function showReaderError(message) {
+    const container = document.getElementById("ayahContainer");
+    container.innerHTML = `<p class="error-text">${message}</p>`;
+}
 
-                <a class="button button-primary" href="reader.html">
-                    Go to Reader
-                </a>
-            </div>
+function renderAyahs(ayahs) {
+    const container = document.getElementById("ayahContainer");
+    container.innerHTML = "";
 
-            <div class="reader-preview-box">
-                <div class="mini-player">
-                    <div class="mini-player-top">
-                        <span>Surah Al-Fatiha</span>
-                        <span class="mini-badge">1×</span>
-                    </div>
+    ayahs.forEach((ayah) => {
+        const card = document.createElement("article");
+        card.className = "ayah-card";
 
-                    <div class="mini-arabic" dir="rtl">
-                        بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ
-                    </div>
+        const number = document.createElement("span");
+        number.className = "ayah-number";
+        number.textContent = `Ayah ${ayah.numberInSurah}`;
 
-                    <div class="mini-wave">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+        const text = document.createElement("div");
+        text.className = "ayah-text";
+        text.textContent = ayah.text;
 
-                    <button
-                        class="button button-secondary"
-                        type="button"
-                        data-modal-title="Reader Ready"
-                        data-modal-message="Open the Quran Reader to start listening and reading."
-                        data-modal-icon="📖"
-                    >
-                        Preview Reader
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+        card.appendChild(number);
+        card.appendChild(text);
+        container.appendChild(card);
+    });
+}
 
-    <section class="section about-section" id="about">
-        <div class="about-card reveal">
-            <div class="about-icon">🕌</div>
-
-            <div>
-                <p class="eyebrow">About QuranAcademy</p>
-                <h2>Made to feel gentle, clear, and welcoming</h2>
-                <p>
-                    QuranAcademy is designed to help children and beginners
-                    approach the Quran with confidence. The experience is
-                    playful enough to keep attention, but calm enough to stay
-                    respectful.
-                </p>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-brand">
-            <a class="logo footer-logo" href="index.html">QuranAcademy</a>
-            <p>
-                A simple and beautiful place to read and listen to the Quran.
-            </p>
-        </div>
-
-        <div class="footer-links">
-            <div>
-                <h3>Explore</h3>
-                <a href="reader.html">Quran Reader</a>
-                <a href="#how">How It Works</a>
-                <a href="#about">About</a>
-            </div>
-
-            <div>
-                <h3>Account</h3>
-                <a href="signin.html">Sign In</a>
-                <a href="signup.html">Sign Up</a>
-            </div>
-
-            <div>
-                <h3>Note</h3>
-                <a href="reader.html">Read without signing up</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        © 2026 QuranAcademy. All rights reserved.
-    </div>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
+function updateUrl(surahNumber, reciter) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("surah", String(surahNumber));
+    url.searchParams.set("reciter", reciter);
+    window.history.replaceState({}, "", url);
+}
