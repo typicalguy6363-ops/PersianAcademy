@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
@@ -8,353 +9,883 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <title>Home | Quran Academy</title>
+
     <meta
         name="description"
-        content="QuranAcademy teaches Arabic letters, Quran reading, short surahs, and Tajweed one level at a time."
-    >
-
-    <title>QuranAcademy | Learn Quran Step by Step</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
+        content="Learn Arabic, Quran vocabulary, pronunciation, and Tajweed with Quran Academy."
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="icon"
+        type="image/x-icon"
+        href="favicon.ico"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="quran-academy-icon.png"
+    >
+
+    <link
         rel="stylesheet"
+        href="academy.css"
     >
-
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="site-header">
+    <!-- ================================= -->
+    <!-- Navigation Header                 -->
+    <!-- ================================= -->
 
-    <nav class="navbar">
+    <header class="academy-header">
 
-        <a class="logo" href="index.html">
-            QuranAcademy
+        <a
+            class="academy-logo"
+            href="index.html"
+            aria-label="Quran Academy home"
+        >
+            <img
+                src="quran-academy-header-logo.png"
+                alt="Quran Academy — Learn, Understand, Practice"
+            >
         </a>
 
         <button
-            class="menu-button"
-            id="menuButton"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
             type="button"
-            aria-label="Open menu"
+            aria-label="Open navigation"
             aria-expanded="false"
         >
-            <span></span>
-            <span></span>
-            <span></span>
+            ☰
         </button>
 
-        <div class="navigation" id="navigation">
-
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#learningPath">Learning Path</a></li>
-                <li><a href="learn.html">Level 1</a></li>
-                <li><a href="reader.html">Quran Reader</a></li>
-            </ul>
-
-            <div class="account-buttons">
-
-                <a
-                    class="button button-outline"
-                    href="signin.html"
-                >
-                    Sign In
-                </a>
-
-                <a
-                    class="button button-primary"
-                    href="signup.html"
-                >
-                    Sign Up
-                </a>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-</header>
-
-<main>
-
-    <section class="hero section">
-
-        <div class="float-shape shape-one"></div>
-        <div class="float-shape shape-two"></div>
-        <div class="float-shape shape-three"></div>
-
-        <div class="hero-content reveal">
-
-            <div class="hero-text">
-
-                <p class="eyebrow">
-                    Quran learning for kids
-                </p>
-
-                <h1>
-                    Learn Quran
-                    <span class="rainbow-text">
-                        one level at a time.
-                    </span>
-                </h1>
-
-                <p class="hero-description">
-                    Begin with the Arabic alphabet, learn vowel sounds,
-                    read Quran words, practice short surahs, and progress
-                    toward the complete Quran and Tajweed.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a
-                        class="button button-primary button-large"
-                        href="learn.html"
-                    >
-                        Start Level 1
-                    </a>
-
-                    <a
-                        class="button button-secondary button-large"
-                        href="reader.html"
-                    >
-                        Open Full Quran
-                    </a>
-
-                </div>
-
-                <div class="hero-stats">
-
-                    <div class="stat">
-                        <strong>7</strong>
-                        <span>Learning levels</span>
-                    </div>
-
-                    <div class="stat">
-                        <strong>28</strong>
-                        <span>Arabic letters</span>
-                    </div>
-
-                    <div class="stat">
-                        <strong>114</strong>
-                        <span>Surahs available</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="hero-visual">
-
-                <div class="kid-scene">
-
-                    <span class="sparkle sparkle-1">✨</span>
-                    <span class="sparkle sparkle-2">⭐</span>
-                    <span class="sparkle sparkle-3">🌙</span>
-
-                    <div class="quran-book">
-
-                        <div class="book-line"></div>
-                        <div class="book-line"></div>
-                        <div class="book-line"></div>
-
-                        <span>Quran</span>
-
-                    </div>
-
-                    <div class="kid kid-boy">
-
-                        <div class="kid-head">
-
-                            <div class="kid-hair"></div>
-
-                            <div class="kid-face">
-                                <span class="eye left-eye"></span>
-                                <span class="eye right-eye"></span>
-                                <span class="smile"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="kid-body"></div>
-
-                    </div>
-
-                    <div class="kid kid-girl">
-
-                        <div class="kid-head">
-
-                            <div class="kid-hijab"></div>
-
-                            <div class="kid-face">
-                                <span class="eye left-eye"></span>
-                                <span class="eye right-eye"></span>
-                                <span class="smile"></span>
-                            </div>
-
-                        </div>
-
-                        <div class="kid-body"></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <section
-        class="section how-section"
-        id="learningPath"
-    >
-
-        <div class="section-heading reveal">
-
-            <p class="eyebrow">
-                Guided learning path
-            </p>
-
-            <h2>
-                Start with letters and grow step by step
-            </h2>
-
-            <p>
-                Students can follow the course while still having free
-                access to the complete Quran Reader.
-            </p>
-
-        </div>
-
-        <div class="feature-grid">
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">🔤</div>
-                <h3>1. Arabic Alphabet</h3>
-                <p>Learn all 28 letters and their basic sounds.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">🎧</div>
-                <h3>2. Vowel Sounds</h3>
-                <p>Learn short a, i, u and long aa, ee, oo.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">🌱</div>
-                <h3>3. Small Words</h3>
-                <p>Start reading short Quranic Arabic words.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">📚</div>
-                <h3>4. Bigger Words</h3>
-                <p>Read longer words and short Quran phrases.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">🌙</div>
-                <h3>5. Short Surahs</h3>
-                <p>Practice Al-Fatiha, Al-Ikhlas, Al-Falaq, and An-Nas.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">📖</div>
-                <h3>6. Full Quran</h3>
-                <p>Read and stream recitations for all 114 surahs.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">✨</div>
-                <h3>7. Tajweed</h3>
-                <p>Learn introductory Tajweed rules.</p>
-            </article>
-
-            <article class="feature-card reveal">
-                <div class="feature-icon">🏆</div>
-                <h3>Save Progress</h3>
-                <p>Level 1 progress saves on the learner’s device.</p>
-            </article>
-
-        </div>
-
-        <div style="text-align: center; margin-top: 42px;">
-
+        <nav
+            class="academy-nav"
+            id="academyNav"
+        >
             <a
-                class="button button-primary button-large"
-                href="learn.html"
-            >
-                Begin Level 1
-            </a>
-
-        </div>
-
-    </section>
-
-</main>
-
-<footer class="footer">
-
-    <div class="footer-content">
-
-        <div class="footer-brand">
-
-            <a
-                class="logo footer-logo"
+                class="active"
                 href="index.html"
             >
-                QuranAcademy
+                Home
             </a>
 
-            <p>
-                Learn Quran reading one level at a time.
-            </p>
+            <a href="learn.html">
+                Levels
+            </a>
 
-        </div>
+            <a href="reader.html">
+                Full Quran
+            </a>
 
-        <div class="footer-links">
+            <a href="leaderboard.html">
+                Leaderboard
+            </a>
 
-            <div>
-                <h3>Learn</h3>
-                <a href="learn.html">Level 1</a>
-                <a href="reader.html">Quran Reader</a>
+            <a href="rewards.html">
+                Rewards
+            </a>
+
+            <a
+                class="account-link"
+                href="account.html"
+            >
+                Account
+            </a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================================= -->
+    <!-- Main Page                         -->
+    <!-- ================================= -->
+
+    <main class="page-shell">
+
+        <!-- ================================= -->
+        <!-- Hero Section                      -->
+        <!-- ================================= -->
+
+        <section class="hero">
+
+            <div class="hero-copy">
+
+                <p class="eyebrow">
+                    A fun Quran learning journey
+                </p>
+
+                <div class="homepage-logo">
+
+                    <img
+                        src="quran-academy-logo.png"
+                        alt="Quran Academy — Learn, Understand, Practice"
+                    >
+
+                </div>
+
+                <h1>
+                    Learn Arabic and Quran skills
+                    one level at a time.
+                </h1>
+
+                <p>
+                    Practice Arabic letters, complete words,
+                    Quran vocabulary, pronunciation, and Tajweed
+                    through 20 exciting learning levels.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a
+                        class="button button-primary"
+                        href="learn.html"
+                    >
+                        Start Learning
+                    </a>
+
+                    <a
+                        class="button button-secondary"
+                        href="reader.html"
+                    >
+                        Open the Quran
+                    </a>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- Website Statistics                -->
+                <!-- ================================= -->
+
+                <div class="stats-strip">
+
+                    <div class="stat-card">
+
+                        <span>
+                            Learning levels
+                        </span>
+
+                        <strong>
+                            20
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span>
+                            Ranks
+                        </span>
+
+                        <strong>
+                            8
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span>
+                            Game rewards
+                        </span>
+
+                        <strong>
+                            20
+                        </strong>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <span>
+                            Total XP
+                        </span>
+
+                        <strong>
+                            7,375
+                        </strong>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <div>
-                <h3>Account</h3>
-                <a href="signin.html">Sign In</a>
-                <a href="signup.html">Sign Up</a>
+
+            <!-- ================================= -->
+            <!-- Hero Logo Card                    -->
+            <!-- ================================= -->
+
+            <div class="hero-art">
+
+                <img
+                    src="quran-academy-icon.png"
+                    alt="Open Quran Academy logo"
+                >
+
             </div>
 
-            <div>
-                <h3>Quick Access</h3>
-                <a href="reader.html?surah=1">Al-Fatiha</a>
-                <a href="reader.html?surah=112">Al-Ikhlas</a>
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- Why Learn With Us                  -->
+        <!-- ================================= -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Why learn with us?
+                    </p>
+
+                    <h2>
+                        Learn, listen, practice, and play.
+                    </h2>
+
+                    <p>
+                        Quran Academy combines small lessons,
+                        helpful voices, quizzes, XP, ranks,
+                        and reward games.
+                    </p>
+
+                </div>
+
             </div>
 
-        </div>
 
-    </div>
+            <div class="card-grid">
 
-    <div class="footer-bottom">
-        © 2026 QuranAcademy. All rights reserved.
-    </div>
+                <article class="feature-card">
 
-</footer>
+                    <div class="feature-icon">
+                        🔊
+                    </div>
 
-<script src="script.js"></script>
+                    <h3>
+                        Realistic voice examples
+                    </h3>
+
+                    <p>
+                        Listen to English instructions and Arabic
+                        pronunciation examples while completing lessons.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🎤
+                    </div>
+
+                    <h3>
+                        Pronunciation practice
+                    </h3>
+
+                    <p>
+                        Practice Arabic sounds using the microphone
+                        pronunciation checker on supported browsers.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🧠
+                    </div>
+
+                    <h3>
+                        Challenging quizzes
+                    </h3>
+
+                    <p>
+                        Answer different questions and prove that
+                        you understand each lesson before continuing.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        ⭐
+                    </div>
+
+                    <h3>
+                        Earn XP
+                    </h3>
+
+                    <p>
+                        Complete lessons to earn XP and move from
+                        Bronze all the way to Quran Champion.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🎮
+                    </div>
+
+                    <h3>
+                        Unlock reward games
+                    </h3>
+
+                    <p>
+                        Every completed level unlocks a special
+                        2D game inside the Reward Arcade.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        📖
+                    </div>
+
+                    <h3>
+                        Read the Quran
+                    </h3>
+
+                    <p>
+                        Open the Quran reader to view Arabic ayahs,
+                        English translations, and recitation audio.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- Course Journey                    -->
+        <!-- ================================= -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Your learning journey
+                    </p>
+
+                    <h2>
+                        From Arabic letters to Tajweed mastery.
+                    </h2>
+
+                    <p>
+                        The course becomes more challenging as
+                        learners move through all twenty levels.
+                    </p>
+
+                </div>
+
+                <a
+                    class="button button-secondary"
+                    href="learn.html"
+                >
+                    See All Levels
+                </a>
+
+            </div>
+
+
+            <div class="card-grid">
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🔤
+                    </div>
+
+                    <h3>
+                        Arabic Foundations
+                    </h3>
+
+                    <p>
+                        Learn Arabic letters, similar shapes,
+                        dots, short vowels, long vowels, and Sukoon.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🔗
+                    </div>
+
+                    <h3>
+                        Arabic Reading
+                    </h3>
+
+                    <p>
+                        Join Arabic letters and begin reading
+                        complete words and Islamic phrases.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        📗
+                    </div>
+
+                    <h3>
+                        Quran Vocabulary
+                    </h3>
+
+                    <p>
+                        Understand important words that appear
+                        frequently throughout the Quran.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        👄
+                    </div>
+
+                    <h3>
+                        Pronunciation Points
+                    </h3>
+
+                    <p>
+                        Learn how Arabic letters are formed using
+                        the lips, tongue, teeth, mouth, and throat.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        Tajweed Rules
+                    </h3>
+
+                    <p>
+                        Practice Madd, Qalqalah, Noon Sakin,
+                        Tanween, and Meem Sakin rules.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        👑
+                    </div>
+
+                    <h3>
+                        Final Mastery
+                    </h3>
+
+                    <p>
+                        Complete advanced Tajweed challenges
+                        and the final Quran Mastery Exam.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- Rank System                       -->
+        <!-- ================================= -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Rank ladder
+                    </p>
+
+                    <h2>
+                        Become a Quran Champion.
+                    </h2>
+
+                    <p>
+                        Keep completing lessons to earn XP
+                        and unlock higher learner ranks.
+                    </p>
+
+                </div>
+
+                <a
+                    class="button button-secondary"
+                    href="leaderboard.html"
+                >
+                    View Leaderboard
+                </a>
+
+            </div>
+
+
+            <div class="rank-grid">
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        🥉
+                    </div>
+
+                    <h3>
+                        Bronze
+                    </h3>
+
+                    <p>
+                        Starting rank
+                    </p>
+
+                </article>
+
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        🥈
+                    </div>
+
+                    <h3>
+                        Silver
+                    </h3>
+
+                    <p>
+                        500 XP
+                    </p>
+
+                </article>
+
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        🥇
+                    </div>
+
+                    <h3>
+                        Gold
+                    </h3>
+
+                    <p>
+                        1,200 XP
+                    </p>
+
+                </article>
+
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        🏅
+                    </div>
+
+                    <h3>
+                        Platinum
+                    </h3>
+
+                    <p>
+                        2,200 XP
+                    </p>
+
+                </article>
+
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        💎
+                    </div>
+
+                    <h3>
+                        Diamond
+                    </h3>
+
+                    <p>
+                        3,500 XP
+                    </p>
+
+                </article>
+
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        👑
+                    </div>
+
+                    <h3>
+                        Master
+                    </h3>
+
+                    <p>
+                        4,800 XP
+                    </p>
+
+                </article>
+
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        🔥
+                    </div>
+
+                    <h3>
+                        Grandmaster
+                    </h3>
+
+                    <p>
+                        6,000 XP
+                    </p>
+
+                </article>
+
+
+                <article class="rank-card">
+
+                    <div class="rank-icon">
+                        🌙
+                    </div>
+
+                    <h3>
+                        Quran Champion
+                    </h3>
+
+                    <p>
+                        7,000 XP
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- Premium Preview                   -->
+        <!-- ================================= -->
+
+        <section class="section surface-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Premium coming later
+                    </p>
+
+                    <h2>
+                        Guided Quran learning.
+                    </h2>
+
+                    <p>
+                        Premium features can later include additional
+                        Quran lessons, parent progress tools,
+                        advanced practice, and more learning activities.
+                    </p>
+
+                </div>
+
+                <button
+                    class="button button-secondary"
+                    type="button"
+                    disabled
+                >
+                    Coming Soon
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- Final Call To Action              -->
+        <!-- ================================= -->
+
+        <section class="section surface-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        Ready to begin?
+                    </p>
+
+                    <h2>
+                        Start with Arabic Alphabet.
+                    </h2>
+
+                    <p>
+                        Guests can try Level 1.
+                        Sign in to save XP, completed levels,
+                        ranks, and unlocked games.
+                    </p>
+
+                </div>
+
+                <div class="button-row">
+
+                    <a
+                        class="button button-primary"
+                        href="lesson.html?level=1"
+                    >
+                        Try Level 1
+                    </a>
+
+                    <a
+                        class="button button-secondary"
+                        href="signup.html"
+                    >
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================= -->
+    <!-- Footer                            -->
+    <!-- ================================= -->
+
+    <footer class="academy-footer">
+
+        <img
+            src="quran-academy-icon.png"
+            alt=""
+            aria-hidden="true"
+        >
+
+        <p>
+            Quran Academy • Learn • Understand • Practice
+        </p>
+
+    </footer>
+
+
+    <!-- ================================= -->
+    <!-- Mobile Navigation Script          -->
+    <!-- ================================= -->
+
+    <script>
+
+        const mobileMenuButton =
+            document.getElementById(
+                "mobileMenuButton"
+            );
+
+        const academyNav =
+            document.getElementById(
+                "academyNav"
+            );
+
+
+        if (
+            mobileMenuButton &&
+            academyNav
+        ) {
+
+            mobileMenuButton.addEventListener(
+                "click",
+                function () {
+
+                    const menuIsOpen =
+                        academyNav.classList.toggle(
+                            "open"
+                        );
+
+                    mobileMenuButton.setAttribute(
+                        "aria-expanded",
+                        String(menuIsOpen)
+                    );
+
+
+                    mobileMenuButton.textContent =
+                        menuIsOpen
+                            ? "✕"
+                            : "☰";
+
+                }
+            );
+
+        }
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (
+                    window.innerWidth > 760 &&
+                    academyNav
+                ) {
+
+                    academyNav.classList.remove(
+                        "open"
+                    );
+
+                    mobileMenuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    mobileMenuButton.textContent =
+                        "☰";
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
+
 </html>
