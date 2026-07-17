@@ -1967,6 +1967,251 @@ a {
     }
 }
 
+    
+
+/* ================================================================
+   Restored Google, email, and password-recovery controls
+   ================================================================ */
+
+.auth-card {
+    width: min(560px, 100%);
+    margin: 10px auto;
+    padding: 31px;
+    border: 1px solid var(--border);
+    border-radius: 27px;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: var(--shadow);
+}
+
+.auth-card-header {
+    text-align: center;
+}
+
+.auth-card-logo {
+    width: 94px;
+    height: 94px;
+    margin: 0 auto 12px;
+    display: block;
+    object-fit: contain;
+}
+
+.auth-card h1 {
+    margin-top: 8px;
+    color: var(--navy);
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.035em;
+}
+
+.auth-card-intro {
+    margin: 10px auto 0;
+    max-width: 430px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.auth-choice-grid {
+    margin-top: 24px;
+    display: grid;
+    gap: 11px;
+}
+
+.auth-provider-button {
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    color: var(--navy);
+    background: white;
+    cursor: pointer;
+    font-weight: 900;
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+.auth-provider-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(15, 157, 120, 0.45);
+    background: #fbfffd;
+    box-shadow: 0 12px 25px rgba(25, 76, 68, 0.09);
+}
+
+.auth-provider-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+.auth-provider-icon {
+    width: 23px;
+    height: 23px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.auth-provider-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.auth-email-button {
+    color: white;
+    border-color: var(--green);
+    background: linear-gradient(135deg, var(--green), #0b7f64);
+}
+
+.auth-email-button:hover {
+    color: white;
+    border-color: var(--dark-green);
+    background: linear-gradient(135deg, #12aa82, var(--dark-green));
+}
+
+.auth-divider {
+    margin: 22px 0;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: var(--border);
+}
+
+.email-auth-panel {
+    overflow: hidden;
+    transition:
+        max-height 0.35s ease,
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.email-auth-panel.closed {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+}
+
+.email-auth-panel.open {
+    max-height: 700px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.password-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.password-label-row label {
+    margin-bottom: 7px;
+}
+
+.forgot-password-link {
+    margin-bottom: 7px;
+    color: var(--green);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 900;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+.auth-help {
+    margin-top: 18px;
+    color: var(--muted);
+    text-align: center;
+    font-size: 0.78rem;
+    line-height: 1.6;
+}
+
+.auth-help a {
+    color: var(--green);
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.auth-help a:hover {
+    text-decoration: underline;
+}
+
+.password-rules {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.55;
+}
+
+.recovery-icon {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 13px;
+    display: grid;
+    place-items: center;
+    border-radius: 24px;
+    color: white;
+    background: linear-gradient(135deg, var(--green), #2563eb);
+    font-size: 2.15rem;
+    box-shadow: 0 16px 30px rgba(15, 157, 120, 0.2);
+}
+
+.auth-status-box {
+    margin-top: 17px;
+    padding: 13px 15px;
+    display: none;
+    border-radius: 14px;
+    color: var(--muted);
+    background: #f4faf7;
+    line-height: 1.55;
+}
+
+.auth-status-box.show {
+    display: block;
+}
+
+.auth-status-box.success {
+    color: var(--dark-green);
+    background: var(--light-green);
+}
+
+.auth-status-box.error {
+    color: var(--danger);
+    background: #fff0f0;
+}
+
+@media (max-width: 560px) {
+    .auth-card {
+        padding: 23px 18px;
+    }
+
+    .auth-card-logo {
+        width: 79px;
+        height: 79px;
+    }
+}
+
     </style>
 </head>
 
@@ -2029,84 +2274,150 @@ a {
 
 <main class="page-shell">
 
-    <section class="form-card">
+    <section class="auth-card">
 
-        <p class="eyebrow">
-            Welcome back
-        </p>
+        <div class="auth-card-header">
 
-        <h1>
-            Sign in
-        </h1>
-
-        <p class="form-intro">
-            Continue your levels, XP, ranks,
-            and reward games.
-        </p>
-
-        <form id="signInForm">
-
-            <div class="form-group">
-
-                <label for="email">
-                    Email
-                </label>
-
-                <input
-                    class="form-control"
-                    id="email"
-                    type="email"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="password">
-                    Password
-                </label>
-
-                <input
-                    class="form-control"
-                    id="password"
-                    type="password"
-                    autocomplete="current-password"
-                    required
-                >
-
-            </div>
-
-            <div
-                class="button-row"
-                style="margin-top:21px;"
+            <img
+                class="auth-card-logo"
+                src="quran-academy-icon.png"
+                alt="Quran Academy"
             >
+
+            <p class="eyebrow">
+                Welcome back
+            </p>
+
+            <h1>
+                Sign in
+            </h1>
+
+            <p class="auth-card-intro">
+                Continue your levels, XP, ranks,
+                and unlocked reward games.
+            </p>
+
+        </div>
+
+        <div class="auth-choice-grid">
+
+            <button
+                class="auth-provider-button"
+                id="googleSignInButton"
+                type="button"
+            >
+                <span class="auth-provider-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.39-.18-2.04H12v3.86h5.38a4.6 4.6 0 0 1-2 3.02v2.51h3.24c1.9-1.75 2.98-4.33 2.98-7.35Z"/>
+        <path fill="#34A853" d="M12 22c2.7 0 4.97-.9 6.63-2.42l-3.24-2.51c-.9.6-2.05.96-3.39.96-2.61 0-4.82-1.76-5.61-4.13H3.04v2.59A10 10 0 0 0 12 22Z"/>
+        <path fill="#FBBC05" d="M6.39 13.9A6 6 0 0 1 6.08 12c0-.66.11-1.3.31-1.9V7.51H3.04A10 10 0 0 0 2 12c0 1.61.39 3.13 1.04 4.49l3.35-2.59Z"/>
+        <path fill="#EA4335" d="M12 5.97c1.47 0 2.79.51 3.82 1.5l2.87-2.87A9.61 9.61 0 0 0 12 2 10 10 0 0 0 3.04 7.51l3.35 2.59C7.18 7.73 9.39 5.97 12 5.97Z"/>
+    </svg>
+</span>
+
+                <span>
+                    Continue with Google
+                </span>
+            </button>
+
+            <button
+                class="auth-provider-button auth-email-button"
+                id="showEmailButton"
+                type="button"
+                aria-expanded="false"
+            >
+                <span class="auth-provider-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+        <path fill="currentColor" d="M3 5.5A2.5 2.5 0 0 1 5.5 3h13A2.5 2.5 0 0 1 21 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.5v-13Zm2.35-.5 6.65 5.22L18.65 5H5.35Zm13.65 2.1-6.38 5a1 1 0 0 1-1.24 0L5 7.1v11.4c0 .28.22.5.5.5h13a.5.5 0 0 0 .5-.5V7.1Z"/>
+    </svg>
+</span>
+
+                <span>
+                    Continue with Email
+                </span>
+            </button>
+
+        </div>
+
+        <div class="auth-divider">
+            Secure learner login
+        </div>
+
+        <div
+            class="email-auth-panel closed"
+            id="emailAuthPanel"
+        >
+
+            <form id="signInForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        class="form-control"
+                        id="email"
+                        type="email"
+                        autocomplete="email"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="password-label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a
+                            class="forgot-password-link"
+                            href="forgot-password.html"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <input
+                        class="form-control"
+                        id="password"
+                        type="password"
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
 
                 <button
                     class="button button-primary"
                     id="signInButton"
                     type="submit"
+                    style="width:100%;margin-top:21px;"
                 >
-                    Sign In
+                    Sign In with Email
                 </button>
 
-                <a
-                    class="button button-secondary"
-                    href="signup.html"
-                >
-                    Create Account
-                </a>
+            </form>
 
-            </div>
+        </div>
 
-        </form>
-
-        <p
-            class="form-message"
+        <div
+            class="auth-status-box"
             id="message"
             aria-live="polite"
-        ></p>
+        ></div>
+
+        <p class="auth-help">
+            New to Quran Academy?
+            <a href="signup.html">Create an account</a>
+        </p>
 
     </section>
 
@@ -2149,9 +2460,21 @@ const quranAcademySupabase =
         }
     );
 
-window.quranAcademySupabase =
-    quranAcademySupabase;
 
+const googleSignInButton =
+    document.getElementById(
+        "googleSignInButton"
+    );
+
+const showEmailButton =
+    document.getElementById(
+        "showEmailButton"
+    );
+
+const emailAuthPanel =
+    document.getElementById(
+        "emailAuthPanel"
+    );
 
 const signInForm =
     document.getElementById(
@@ -2178,17 +2501,102 @@ const message =
         "message"
     );
 
-async function signIn(event) {
-    event.preventDefault();
-
+function showMessage(
+    text,
+    type = ""
+) {
+    message.textContent = text;
     message.className =
-        "form-message";
+        `auth-status-box show ${type}`;
+}
 
-    message.textContent =
-        "Signing in...";
+function toggleEmailPanel() {
+    const opening =
+        emailAuthPanel.classList.contains(
+            "closed"
+        );
+
+    emailAuthPanel.classList.toggle(
+        "closed",
+        !opening
+    );
+
+    emailAuthPanel.classList.toggle(
+        "open",
+        opening
+    );
+
+    showEmailButton.setAttribute(
+        "aria-expanded",
+        String(opening)
+    );
+
+    showEmailButton.querySelector(
+        "span:last-child"
+    ).textContent =
+        opening
+            ? "Hide Email Login"
+            : "Continue with Email";
+
+    if (opening) {
+        window.setTimeout(
+            function () {
+                emailInput.focus();
+            },
+            250
+        );
+    }
+}
+
+async function signInWithGoogle() {
+    googleSignInButton.disabled =
+        true;
+
+    showMessage(
+        "Opening Google sign-in..."
+    );
+
+    try {
+        const {
+            error
+        } =
+            await quranAcademySupabase
+                .auth
+                .signInWithOAuth({
+                    provider: "google",
+                    options: {
+                        redirectTo:
+                            "https://quranacademy24.com/account.html"
+                    }
+                });
+
+        if (error) {
+            throw error;
+        }
+    }
+    catch (error) {
+        console.error(error);
+
+        showMessage(
+            error.message ||
+            "Google sign-in is not enabled yet.",
+            "error"
+        );
+
+        googleSignInButton.disabled =
+            false;
+    }
+}
+
+async function signInWithEmail(event) {
+    event.preventDefault();
 
     signInButton.disabled =
         true;
+
+    showMessage(
+        "Signing in..."
+    );
 
     try {
         const {
@@ -2207,32 +2615,58 @@ async function signIn(event) {
             throw error;
         }
 
-        message.className =
-            "form-message success";
-
-        message.textContent =
-            "Signed in successfully.";
+        showMessage(
+            "Signed in successfully.",
+            "success"
+        );
 
         window.location.href =
             "learn.html";
     }
     catch (error) {
-        message.className =
-            "form-message error";
+        console.error(error);
 
-        message.textContent =
+        showMessage(
             error.message ||
-            "Sign in failed.";
+            "Email sign-in failed.",
+            "error"
+        );
 
         signInButton.disabled =
             false;
     }
 }
 
+googleSignInButton.addEventListener(
+    "click",
+    signInWithGoogle
+);
+
+showEmailButton.addEventListener(
+    "click",
+    toggleEmailPanel
+);
+
 signInForm.addEventListener(
     "submit",
-    signIn
+    signInWithEmail
 );
+
+const pageParameters =
+    new URLSearchParams(
+        window.location.search
+    );
+
+if (
+    pageParameters.get("reset") === "success"
+) {
+    showMessage(
+        "Your password was changed. Sign in with your new password.",
+        "success"
+    );
+
+    toggleEmailPanel();
+}
 
 
 const mobileMenuButton =
