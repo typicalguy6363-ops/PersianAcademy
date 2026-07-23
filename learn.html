@@ -1967,6 +1967,78 @@ a {
     }
 }
 
+
+
+/* Arabic Typing Course access card */
+.typing-course-card {
+    margin: 34px 0 8px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border: 2px solid rgba(15, 157, 120, 0.3);
+    border-radius: 24px;
+    color: var(--navy);
+    background: linear-gradient(135deg, #effff8, #ffffff);
+    box-shadow: 0 14px 34px rgba(15, 157, 120, 0.12);
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.typing-course-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--green);
+    box-shadow: 0 20px 42px rgba(15, 157, 120, 0.18);
+}
+
+.typing-course-card-icon {
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: var(--light-green);
+    font-size: 2rem;
+}
+
+.typing-course-card-copy {
+    flex: 1;
+}
+
+.typing-course-card-copy strong {
+    display: block;
+    font-size: 1.25rem;
+}
+
+.typing-course-card-copy span {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.typing-course-card-arrow {
+    color: var(--green);
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+
+@media (max-width: 560px) {
+    .typing-course-card {
+        align-items: flex-start;
+        padding: 19px;
+    }
+
+    .typing-course-card-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 16px;
+        font-size: 1.55rem;
+    }
+}
+
     </style>
 </head>
 
@@ -2158,6 +2230,17 @@ a {
         </aside>
 
     </section>
+
+    <a class="typing-course-card" href="typing-course.html">
+        <span class="typing-course-card-icon">⌨️</span>
+
+        <span class="typing-course-card-copy">
+            <strong>Arabic Typing Course</strong>
+            <span>Complete longer five-question levels, earn XP, and keep your daily streak going.</span>
+        </span>
+
+        <span class="typing-course-card-arrow" aria-hidden="true">→</span>
+    </a>
 
     <section>
 
