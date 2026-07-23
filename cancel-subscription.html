@@ -29,22 +29,20 @@
             font-family: Arial, Helvetica, sans-serif;
             color: #16382d;
 
-            background: linear-gradient(
-                135deg,
-                #e9fff5,
-                #eef4ff
-            );
+            background:
+                linear-gradient(135deg, #e9fff5, #eef4ff);
         }
 
         .cancel-card {
             width: 100%;
-            max-width: 540px;
+            max-width: 520px;
             padding: 38px;
 
             background: white;
             border-radius: 24px;
 
-            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.13);
+            box-shadow:
+                0 18px 55px rgba(0, 0, 0, 0.13);
 
             text-align: center;
         }
@@ -59,8 +57,8 @@
             align-items: center;
 
             border-radius: 50%;
-
             background: #fff0f0;
+
             font-size: 34px;
         }
 
@@ -76,7 +74,7 @@
         }
 
         .warning-box {
-            margin: 25px 0 18px;
+            margin: 25px 0;
             padding: 17px;
 
             border: 1px solid #f2d79b;
@@ -86,27 +84,6 @@
             color: #71520d;
 
             line-height: 1.5;
-        }
-
-        .streak-box {
-            margin-bottom: 22px;
-            padding: 18px;
-
-            border: 1px solid #ffd1a8;
-            border-radius: 14px;
-
-            background: #fff5eb;
-            color: #754014;
-
-            line-height: 1.5;
-        }
-
-        .streak-title {
-            display: block;
-            margin-bottom: 6px;
-
-            font-size: 18px;
-            font-weight: 800;
         }
 
         button,
@@ -119,7 +96,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
 
             border: none;
             border-radius: 13px;
@@ -154,15 +130,6 @@
             opacity: 0.65;
             cursor: not-allowed;
             transform: none;
-        }
-
-        .xp-button {
-            background: #ff9f1c;
-            color: white;
-        }
-
-        .xp-button:hover {
-            background: #e8890b;
         }
 
         .keep-button {
@@ -232,32 +199,16 @@
         </p>
 
         <div class="warning-box">
-            You will keep Premium access until the end of your
-            current billing period or free trial. You will not
-            be charged again after cancellation.
+            You will keep Premium until the end of your current
+            billing period or free trial. You will not be charged
+            again afterward.
         </div>
-
-        <div class="streak-box">
-            <span class="streak-title">
-                🔥 Keep Your Streak Going
-            </span>
-
-            Complete a quick lesson to earn XP and protect your
-            learning streak.
-        </div>
-
-        <a
-            class="action-button xp-button"
-            href="/dashboard.html?activity=daily-practice"
-        >
-            ⚡ Earn XP Instead
-        </a>
 
         <a
             class="action-button keep-button"
             href="/account.html"
         >
-            💚 Keep My Subscription
+            Keep My Subscription
         </a>
 
         <button id="cancelButton" type="button">
@@ -313,7 +264,7 @@
             } = await quranAcademySupabase.auth.getSession();
 
             if (error) {
-                console.error("Session error:", error);
+                console.error(error);
                 return null;
             }
 
@@ -352,17 +303,12 @@
                     );
 
                 if (error) {
-                    console.error(
-                        "Cancel function error:",
-                        error
-                    );
-
                     throw new Error(
                         "The cancellation request failed."
                     );
                 }
 
-                if (!data || data.success !== true) {
+                if (!data?.success) {
                     throw new Error(
                         data?.error ||
                         "The subscription could not be canceled."
@@ -371,7 +317,7 @@
 
                 showMessage(
                     data.message ||
-                    "Your subscription will end after your current billing period.",
+                    "Your subscription cancellation is scheduled.",
                     "success"
                 );
 
